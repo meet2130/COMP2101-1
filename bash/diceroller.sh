@@ -13,7 +13,8 @@
 
 # rolling the dice and displaying the random number
 
-echo "yug is my name so, there will be three dice which rolles up and give random number"
+echo "yug is my name so, there will be three dice which rolles up and give random number
 
 $(( RANDOM % 6 )), $(( RANDOM % 6 )), $(( RANDOM % 6 ))  rolling
+
 "
