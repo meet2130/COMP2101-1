@@ -38,55 +38,26 @@
 
 
 mY_hostName=$(hostname)
-
 default_Router_Address=$(ip r s default| cut -d ' ' -f 3)
-
-default_Router_Name=$(getent hosts $default_Router_Address|awk '{print $2}')
-
-external_Address=$(curl -s icanhazip.com)
-
-
+external_Address=$(curl -s  ifconfig.co)
+default_Roter_Name=$(getent hosts $default_Router_Address|awk '{print $2}')
+external_Name=$(getent hosts $external_address | awk '{print $2}'
+)
 
 
 
-getInt=$(lshw -class network | awk '/logical name:/{print $3}' | wc -l)
 
-for((w=1;w<=$getInt;w+=1));
-
-do
-
-  interface=$(lshw -class network | awk '/logical name:/{print $3}' | awk -v z=$w 'NR==z{print $1; exit}')
-
-  if [[ $interface = lo* ]] ; then
-
-    continue ;
-
-  fi
+cat <<EOF
+System Identification Summary
+=========================
+Hostname    : $mY_hostName
+Default router: $default_Router_Address
+Router name   : $default_Roter_Name
+Externa IP   : $external_Address
+External Name : $external_Name
 
 
+EOF
 
-  ip4_add=$(ip a s $interface | awk -F '[/ ]+' '/inet /{print $3}')
 
-  ip4_hname=$(getent hosts $ip4_address | awk '{print $2}')
-
-  network_add=$(ip route list dev $interface scope link|cut -d ' ' -f 1)
-
-  network_no=$(cut -d / -f 1 <<<"$network_address")
-
-  net_name=$(getent networks $network_no|awk '{print $1}')
-
-  echo Interface        :$interface
-
-  echo -----------------------------------------
-
-  echo Addres          : $ip4_add
-
-  echo Name of network  : $ip4_hname
-
-  echo Network Name     : $net_name
-
-  echo Network address  : $network_add
-
-  
-
-done
+# End of report
