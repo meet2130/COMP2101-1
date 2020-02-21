@@ -5,10 +5,9 @@ z2="-v is for Verbose."
 z3="-d is for Debug."
 
 while [ $# -gt 0 ]; do
-	echo "There are $# thing left to process on the cmd argument."
+
 	myargs+=("$1")
-	echo "Added '$1' to the myargs array"
-	echo "Processing the '$1'."
+
 	case $1 in
 		-h )
 			echo "You added \"-h\" for help."
@@ -19,17 +18,17 @@ while [ $# -gt 0 ]; do
 			;;
 		-v )
 			verbo=1
-			echo 'You added "-v" for verbose.'
-			echo 'Verbose mode is set to be on.'
-			echo 'Processing "-v"'
+
+
+
 			;;
 		-d )
 			debug=1
 			case "$2" in
 			[1-5] )
-				echo "Debug mode is set to be ON."
+
 				num=$2
-				echo "You added \"-d\" for debug level $num."
+
 				shift
 				;;
 				*)
@@ -44,7 +43,7 @@ while [ $# -gt 0 ]; do
 			;;
 	esac
 	shift
-	echo "Shifted command line, leaving $# things left to the cmd argument."
+
 	echo "-----------------------------------------------------------------"
 done
 if [ "$verbo" == "1" ]; then
